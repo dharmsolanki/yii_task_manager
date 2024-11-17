@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "11dd973cbbda6173f88d48f5cdc98bde",
+    "content-hash": "c63ef613fb94d238bc47f8e4ca129dc3",
     "packages": [
         {
             "name": "2amigos/yii2-arrayquery-component",
@@ -448,6 +448,38 @@
                 "source": "https://github.com/ezyang/htmlpurifier/tree/v4.18.0"
             },
             "time": "2024-11-01T03:51:45+00:00"
+        },
+        {
+            "name": "ilopx/yii2-basic-htaccess",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ilopX/yii2-basic-htaccess.git",
+                "reference": "6be3223a9a2009bcad7198652d60e650dbf0cc2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ilopX/yii2-basic-htaccess/zipball/6be3223a9a2009bcad7198652d60e650dbf0cc2f",
+                "reference": "6be3223a9a2009bcad7198652d60e650dbf0cc2f",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ilopX",
+                    "email": "ilopX@ukr.net"
+                }
+            ],
+            "description": "Set web directory in webroot",
+            "support": {
+                "issues": "https://github.com/ilopX/yii2-basic-htaccess/issues",
+                "source": "https://github.com/ilopX/yii2-basic-htaccess/tree/1.0"
+            },
+            "time": "2015-08-22T22:21:39+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -5720,5 +5752,5 @@
         "php": ">=7.4.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.2.0"
 }
