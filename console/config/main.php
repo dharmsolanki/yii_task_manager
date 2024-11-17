@@ -21,6 +21,9 @@ return [
             'class' => \yii\console\controllers\FixtureController::class,
             'namespace' => 'common\fixtures',
           ],
+          'rbac' => [
+            'class' => 'console\controllers\RbacController',
+        ],
     ],
     'modules' => [
         'rbac' => [
