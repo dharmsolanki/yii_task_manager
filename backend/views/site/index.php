@@ -6,37 +6,15 @@ use yii\helpers\Url;
 
 $this->title = 'Dashboard';
 ?>
-<div class="dashboard-container d-flex">
-    <!-- Sidebar -->
-    <nav class="sidebar bg-primary text-white p-3" style="width: 250px; min-height: 100vh;">
-        <h4 class="text-white mb-4">My Dashboard</h4>
-        <ul class="nav flex-column">
-            
-            <li class="nav-item mb-2">
-                <?= Html::a('Users', ['/user/index'], ['class' => 'nav-link text-white']) ?>
-            </li>
-            <li class="nav-item">
-                <?= Html::a('Logout', ['/site/logout'], ['class' => 'nav-link text-white', 'data-method' => 'post']) ?>
-            </li>
-        </ul>
-    </nav>
+<div class="site-index">
 
-    <!-- Main Content -->
-    <div class="content w-100">
-        <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
-            <div class="container-fluid">
-                <span class="navbar-brand">Welcome, User</span>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <?= Html::a('Notifications', ['/notifications'], ['class' => 'nav-link']) ?>
-                    </li>
-                    <li class="nav-item">
-                        <?= Html::a('Messages', ['/messages'], ['class' => 'nav-link']) ?>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+    <div class="jumbotron text-center bg-transparent">
+        <h1 class="display-4">Congratulations!</h1>
+
+        <p class="lead">You have successfully created your Yii-powered application.</p>
+
+        <p><a class="btn btn-lg btn-success" href="https://www.yiiframework.com">Get started with Yii</a></p>
+    </div>
 
         <!-- Dashboard Content -->
         <div class="container mt-4">
