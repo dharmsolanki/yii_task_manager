@@ -16,7 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -28,10 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     
                     return ($model->status === 10) ? 'Active' : 'Inactive';
                 },
-                'filter' => [
-                    10 => 'Active',
-                    9 => 'Inactive',
-                ],
             ],
             'created_at:datetime', // Column with datetime formatting
 
