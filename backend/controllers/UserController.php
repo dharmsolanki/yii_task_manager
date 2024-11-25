@@ -26,7 +26,6 @@ class UserController extends \yii\web\Controller
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', "User Created");
             return $this->redirect(Url::to(['site/index']));
         }
 
@@ -41,7 +40,7 @@ class UserController extends \yii\web\Controller
     {
         $user = User::findOne($id);
         // echo "<pre>"; print_r($user); exit();
-
+        $this->layout = 'blank';
         return $this->render('update',[
             'model' => $user,
         ]);

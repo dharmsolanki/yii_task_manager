@@ -62,8 +62,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout = 'blank';
-        return $this->render('index');
+        return $this->render('dashboard');
     }
 
     /**
