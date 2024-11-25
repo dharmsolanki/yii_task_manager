@@ -7,6 +7,7 @@ use backend\assets\AppAsset;
 use common\widgets\Alert;
 use yii\bootstrap5\Html;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 AppAsset::register($this);
 ?>
@@ -86,6 +87,7 @@ AppAsset::register($this);
 
 <body class="d-flex flex-column h-100">
     <?php $this->beginBody() ?>
+    <?php Pjax::begin() ?>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -107,7 +109,7 @@ AppAsset::register($this);
             </div>
         </main>
     </div>
-
+    <?php Pjax::end(); ?>
     <?php $this->endBody() ?>
 </body>
 

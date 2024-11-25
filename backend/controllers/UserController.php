@@ -16,7 +16,7 @@ class UserController extends \yii\web\Controller
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render('userListing', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
