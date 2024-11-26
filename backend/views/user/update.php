@@ -54,6 +54,6 @@ $this->registerLinkTag([
     ]
 ) ?>
 
-<?= Html::submitButton('Signup', ['id' => 'btn-submit']) ?>
+<?= Html::submitButton('Update', ['id' => 'btn-submit']) ?>
 
 <?php ActiveForm::end(); ?>

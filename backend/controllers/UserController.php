@@ -6,7 +6,6 @@ use common\models\User;
 use common\models\UserSearch;
 use frontend\models\SignupForm;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 
 class UserController extends \yii\web\Controller
@@ -39,9 +38,18 @@ class UserController extends \yii\web\Controller
     public function actionUpdate($id)
     {
         $user = User::findOne($id);
-        // echo "<pre>"; print_r($user); exit();
         $this->layout = 'blank';
-        return $this->render('update',[
+        if ($user->load(Yii::$app->request->post())) {
+            if ($user->save()) {
+
+                Yii::$app->session->setFlash('success', 'User Updated successfully!');
+                return $this->redirect(['user/index']);
+            } else {
+                Yii::$app->session->setFlash('error', 'Something went wrong!');
+                return $this->redirect(['user/index']);
+            }
+        }
+        return $this->render('update', [
             'model' => $user,
         ]);
     }

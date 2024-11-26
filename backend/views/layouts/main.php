@@ -104,7 +104,7 @@ AppAsset::register($this);
         <!-- Main Content -->
         <main role="main" class="flex-shrink-0">
             <div class="container mt-4">
-                <?= Alert::widget() ?>
+                <?php //echo Alert::widget() ?>
                 <?= $content ?>
             </div>
         </main>
