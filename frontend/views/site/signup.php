@@ -1,35 +1,56 @@
 <?php
 
 /** @var yii\web\View $this */
-/** @var yii\bootstrap5\ActiveForm $form */
-/** @var \frontend\models\SignupForm $model */
 
-use yii\bootstrap5\Html;
-use yii\bootstrap5\ActiveForm;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+/** @var yii\bootstrap5\ActiveForm $form */
+/** @var \common\models\LoginForm $model */
 
 $this->title = 'Signup';
-$this->params['breadcrumbs'][] = $this->title;
+
+// Register a custom CSS file
+$this->registerCssFile('@web/css/login.css');
+$this->registerCss("
+body {
+    background-color: #080710;
+}
+");
+$this->registerCssFile('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css', [
+    'depends' => [\yii\web\YiiAsset::class],
+]);
+
+$this->registerCssFile('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap', [
+    'depends' => [\yii\web\YiiAsset::class],
+]);
+
+$this->registerLinkTag([
+    'rel' => 'preconnect',
+    'href' => 'https://fonts.gstatic.com',
+]);
 ?>
-<div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to signup:</p>
-
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'email') ?>
-
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
-        </div>
-    </div>
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
 </div>
+
+<?php $form = ActiveForm::begin(); ?>
+
+<?= $form->field($model, 'username', [
+    'inputOptions' => ['id' => 'username', 'placeholder' => 'Username or Email']
+])->label('Username') ?>
+
+<?= $form->field($model, 'email', [
+    'inputOptions' => ['id' => 'email', 'placeholder' => 'Enter your email']
+])->label('Email') ?>
+
+
+<?= $form->field($model, 'password', [
+    'inputOptions' => ['id' => 'password', 'placeholder' => 'Password']
+])->passwordInput()->label('Password') ?>
+
+<?= Html::submitButton('Signup', ['id' => 'btn-submit']) ?>
+
+<?php ActiveForm::end(); ?>
