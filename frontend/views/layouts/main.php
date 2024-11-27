@@ -94,7 +94,7 @@ AppAsset::register($this);
         <h3 class="text-center text-white"><?= Yii::$app->name ?></h3>
         <hr class="text-white">
         <a href="<?= Url::to(['site/dashboard']) ?>" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-        <a href="<?= Url::to(['user/index']) ?>"><i class="fas fa-users"></i> Users</a>
+        <a href="<?= Url::to(['task/index']) ?>"><i class="fas fa-tasks"></i>Tasks</a>
         <a href="<?= Url::to(['site/logout']) ?>" data-method="post"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 

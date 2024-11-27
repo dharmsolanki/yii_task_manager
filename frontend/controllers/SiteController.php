@@ -75,8 +75,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout = 'blank';
-        return $this->render('index');
+        if(Yii::$app->user->isGuest) {
+
+            $this->layout = 'blank';
+            return $this->render('index');
+        }
+        return $this->redirect(['site/dashboard']);
     }
 
     /**
