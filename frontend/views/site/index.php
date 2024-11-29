@@ -88,7 +88,6 @@ if (Yii::$app->session->hasFlash('success')) {
     .hero-overlay {
         background: rgba(0, 0, 0, 0.6);
         /* Transparent dark overlay */
-        background-image: url('path_to_your_image.jpg');
         /* Optional: Add background image */
         background-size: cover;
         background-position: center;
