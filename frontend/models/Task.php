@@ -3,6 +3,9 @@
 namespace frontend\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "task".
@@ -30,6 +33,34 @@ class Task extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'task';
+    }
+
+        /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                // Use time() to store as an integer (Unix timestamp)
+                'value' => function () {
+                    return time();
+                },
+            ],
+            // Automatically sets the created_by and updated_by attributes to the ID of the currently logged-in user.
+            [
+                'class' => BlameableBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_by', 'updated_by'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_by'],
+                ],
+            ],
+        ];
     }
 
     /**
