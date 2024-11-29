@@ -93,9 +93,19 @@ AppAsset::register($this);
     <div class="sidebar">
         <h3 class="text-center text-white"><?= Yii::$app->name ?></h3>
         <hr class="text-white">
-        <a href="<?= Url::to(['site/dashboard']) ?>" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-        <a href="<?= Url::to(['task/index']) ?>"><i class="fas fa-tasks"></i>Tasks</a>
-        <a href="<?= Url::to(['site/logout']) ?>" data-method="post"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        <?php
+        echo Html::a('<i class="fas fa-tachometer-alt"></i> Dashboard', Url::to(['site/dashboard']), [
+            'class' => 'active',  // Bootstrap button class for styling
+        ]);
+
+        echo Html::a('<i class="fas fa-tasks"></i> Tasks', Url::to(['task/index']));
+
+        if (!Yii::$app->user->isGuest) {
+            echo Html::a('<i class="fas fa-sign-out-alt"></i> Logout', Url::to(['site/logout']), [
+                'data-method' => "post"
+            ]);
+        }
+        ?>
     </div>
 
     <!-- Main Content -->
@@ -104,7 +114,8 @@ AppAsset::register($this);
         <!-- Main Content -->
         <main role="main" class="flex-shrink-0">
             <div class="container mt-4">
-                <?php //echo Alert::widget() ?>
+                <?php //echo Alert::widget() 
+                ?>
                 <?= $content ?>
             </div>
         </main>

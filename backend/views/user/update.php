@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 /** @var yii\bootstrap5\ActiveForm $form */
 /** @var \common\models\LoginForm $model */
 
-$this->title = 'Signup';
+$this->title = 'Update';
 
 // Register a custom CSS file
 $this->registerCssFile('@web/css/login.css');
