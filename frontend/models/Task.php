@@ -26,7 +26,7 @@ class Task extends \yii\db\ActiveRecord
     const PRIORITY_LOW = 1;
     const PRIORITY_MEDIUM = 2;
     const PRIORITY_HIGH = 3;
-    
+
     /**
      * {@inheritdoc}
      */
@@ -35,7 +35,7 @@ class Task extends \yii\db\ActiveRecord
         return 'task';
     }
 
-        /**
+    /**
      * {@inheritdoc}
      */
     public function behaviors()
@@ -94,5 +94,15 @@ class Task extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
         ];
+    }
+
+    /**
+     * Fetch tasks created by the logged-in user.
+     *
+     * @return ActiveQuery
+     */
+    public static function getTasksByUser()
+    {
+        return self::find()->where(['created_by' => Yii::$app->user->identity->id]);
     }
 }

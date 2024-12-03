@@ -6,6 +6,28 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 $this->title = 'Dashboard';
+$this->registerCssFile('@web/css/sweetalert2.min.css');
+$this->registerJsFile('@web/js/sweetalert2.min.js');
+// SweetAlert2 Flash Messages
+if (Yii::$app->session->hasFlash('success')) {
+    $this->registerJs("
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '" . Html::encode(Yii::$app->session->getFlash('success')) . "',
+            confirmButtonText: 'OK'
+        });
+    ");
+} elseif (Yii::$app->session->hasFlash('error')) {
+    $this->registerJs("
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: '" . Html::encode(Yii::$app->session->getFlash('error')) . "',
+            confirmButtonText: 'Try Again'
+        });
+    ");
+}
 ?>
 
 <!-- Main Content -->

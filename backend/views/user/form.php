@@ -2,13 +2,14 @@
 
 /** @var yii\web\View $this */
 
+use common\models\User;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\bootstrap5\ActiveForm $form */
 /** @var \common\models\LoginForm $model */
 
-$this->title = 'Signup';
+$this->title = $isUpdate ? 'Update' : 'Signup';
 
 // Register a custom CSS file
 $this->registerCssFile('@web/css/login.css');
@@ -46,11 +47,22 @@ $this->registerLinkTag([
     'inputOptions' => ['id' => 'email', 'placeholder' => 'Enter your email']
 ])->label('Email') ?>
 
+<?php if (!$isUpdate): // Show password field only for signup 
+?>
+    <?= $form->field($model, 'password', [
+        'inputOptions' => ['id' => 'password', 'placeholder' => 'Password']
+    ])->passwordInput()->label('Password') ?>
+<?php endif; ?>
 
-<?= $form->field($model, 'password', [
-    'inputOptions' => ['id' => 'password', 'placeholder' => 'Password']
-])->passwordInput()->label('Password') ?>
-
-<?= Html::submitButton('Signup', ['id' => 'btn-submit']) ?>
+<?php if ($isUpdate): // Show password field only for update 
+?>
+<?= $form->field($model, 'status')->dropDownList(
+    [User::STATUS_ACTIVE => 'Active', User::STATUS_INACTIVE => 'Inactive'],
+    [
+        'class' => 'status-dropdown', // Add a custom class for specific styling
+    ]
+) ?>
+<?php endif; ?>
+<?= Html::submitButton($isUpdate ? 'Update' : 'Signup', ['id' => 'btn-submit']) ?>
 
 <?php ActiveForm::end(); ?>

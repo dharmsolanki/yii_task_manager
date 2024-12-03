@@ -24,14 +24,17 @@ class UserController extends \yii\web\Controller
     public function actionSignup()
     {
         $model = new SignupForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            return $this->redirect(Url::to(['site/index']));
+            Yii::$app->session->setFlash('success', 'User Created.');
+            return $this->redirect(['site/index']);
         }
 
         $this->layout = 'blank';
 
-        return $this->render('signup', [
+        return $this->render('form', [
             'model' => $model,
+            'isUpdate' => false, // Indicates this is a signup (creation)
         ]);
     }
 
@@ -39,9 +42,9 @@ class UserController extends \yii\web\Controller
     {
         $user = User::findOne($id);
         $this->layout = 'blank';
+
         if ($user->load(Yii::$app->request->post())) {
             if ($user->save()) {
-
                 Yii::$app->session->setFlash('success', 'User Updated successfully!');
                 return $this->redirect(['user/index']);
             } else {
@@ -49,8 +52,10 @@ class UserController extends \yii\web\Controller
                 return $this->redirect(['user/index']);
             }
         }
-        return $this->render('update', [
+
+        return $this->render('form', [
             'model' => $user,
+            'isUpdate' => true, // Indicates this is an update
         ]);
     }
 }
