@@ -25,9 +25,7 @@ AppAsset::register($this);
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            /* background-color: #f0f0f0; */
             background-color: #f0f0f0;
-            /* Change this to your desired color */
         }
 
         .sidebar {
@@ -37,7 +35,6 @@ AppAsset::register($this);
             width: 250px;
             height: 100%;
             background-color: #212529;
-            /* Dark background for sidebar */
             color: white;
             padding-top: 20px;
             transition: all 0.3s;
@@ -61,16 +58,11 @@ AppAsset::register($this);
 
         .sidebar a.active {
             background-color: #28a745;
-            /* Highlight active link */
         }
 
         .content-wrapper {
             margin-left: 250px;
             padding: 20px;
-        }
-
-        .navbar {
-            z-index: 1000;
         }
 
         footer {
@@ -95,14 +87,20 @@ AppAsset::register($this);
         <hr class="text-white">
         <?php
         echo Html::a('<i class="fas fa-tachometer-alt"></i> Dashboard', Url::to(['site/dashboard']), [
-            'class' => 'active',  // Bootstrap button class for styling
+            'class' => 'sidebar-link',
+            'data-id' => 'dashboard',
         ]);
 
-        echo Html::a('<i class="fas fa-tasks"></i> Tasks', Url::to(['task/index']));
+        echo Html::a('<i class="fas fa-tasks"></i> Tasks', Url::to(['task/index']), [
+            'class' => 'sidebar-link',
+            'data-id' => 'tasks',
+        ]);
 
         if (!Yii::$app->user->isGuest) {
             echo Html::a('<i class="fas fa-sign-out-alt"></i> Logout', Url::to(['site/logout']), [
-                'data-method' => "post"
+                'data-method' => "post",
+                'class' => 'sidebar-link',
+                'data-id' => 'logout',
             ]);
         }
         ?>
@@ -110,18 +108,39 @@ AppAsset::register($this);
 
     <!-- Main Content -->
     <div class="content-wrapper">
-
-        <!-- Main Content -->
         <main role="main" class="flex-shrink-0">
             <div class="container mt-4">
-                <?php //echo Alert::widget() 
-                ?>
                 <?= $content ?>
             </div>
         </main>
     </div>
     <?php Pjax::end(); ?>
     <?php $this->endBody() ?>
+
+    <!-- Dynamic Active Link Script -->
+    <script>
+        // Function to update active class
+        function updateActiveClass() {
+            const currentUrl = window.location.pathname;
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
+
+            sidebarLinks.forEach(link => {
+                if (link.getAttribute('href') === currentUrl) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        // Update active class on initial page load
+        document.addEventListener('DOMContentLoaded', updateActiveClass);
+
+        // Update active class after Pjax content load
+        $(document).on('pjax:end', function() {
+            updateActiveClass();
+        });
+    </script>
 </body>
 
 </html>
