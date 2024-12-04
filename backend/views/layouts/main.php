@@ -4,6 +4,8 @@
 /** @var string $content */
 
 use backend\assets\AppAsset;
+use common\models\Menu;
+// echo '<pre>'; print_r(Menu::getMenuItems());exit();
 use common\widgets\Alert;
 use yii\bootstrap5\Html;
 use yii\helpers\Url;
@@ -86,8 +88,22 @@ AppAsset::register($this);
         <h3 class="text-center text-white"><?= Yii::$app->name ?></h3>
         <hr class="text-white">
         <a href="<?= Yii::$app->homeUrl ?>" class="sidebar-link" data-id="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-        <a href="<?= Url::to(['user/index']) ?>" class="sidebar-link" data-id="users"><i class="fas fa-users"></i> Users</a>
-        <a href="<?= Url::to(['site/logout']) ?>" class="sidebar-link" data-method="post" data-id="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        <?php
+        foreach (Menu::getMenuItems() as $menuItem) {
+            echo \yii\helpers\Html::a(
+                // Icon and Label
+                '<i class="' . $menuItem['icon'] . '"></i> ' . Yii::t('app', $menuItem['label']),
+                Url::to([$menuItem['url']]), // URL
+                array_merge(['class' => 'sidebar-link'], $menuItem['options'] ?? [])
+            );
+        }
+        ?>
+        <?= \yii\helpers\Html::a(
+            '<i class="fas fa-sign-out-alt"></i> ' . Yii::t('app', 'Logout'),
+            ['site/logout'], // URL for the logout action
+            ['class' => 'sidebar-link', 'data-method' => 'post', 'data-id' => 'logout']
+        ) ?>
+
     </div>
 
     <!-- Main Content -->

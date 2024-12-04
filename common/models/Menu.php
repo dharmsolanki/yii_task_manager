@@ -63,7 +63,6 @@ class Menu extends \yii\db\ActiveRecord
     {
         return self::find()
             ->where(['is_active' => 1])
-            ->orderBy(['parent_id' => SORT_ASC, 'sort_order' => SORT_ASC])
             ->asArray()
             ->all();
     }
