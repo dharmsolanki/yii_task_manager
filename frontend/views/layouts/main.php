@@ -4,6 +4,7 @@
 /** @var string $content */
 
 use backend\assets\AppAsset;
+use common\models\Menu;
 use common\widgets\Alert;
 use yii\bootstrap5\Html;
 use yii\helpers\Url;
@@ -91,10 +92,14 @@ AppAsset::register($this);
             'data-id' => 'dashboard',
         ]);
 
-        echo Html::a('<i class="fas fa-tasks"></i> Tasks', Url::to(['task/index']), [
-            'class' => 'sidebar-link',
-            'data-id' => 'tasks',
-        ]);
+        foreach (Menu::getMenuItems() as $menuItem) {
+            echo \yii\helpers\Html::a(
+                // Icon and Label
+                '<i class="' . $menuItem['icon'] . '"></i> ' . Yii::t('app', $menuItem['label']),
+                Url::to([$menuItem['url']]), // URL
+                array_merge(['class' => 'sidebar-link'], $menuItem['options'] ?? [])
+            );
+        }
 
         if (!Yii::$app->user->isGuest) {
             echo Html::a('<i class="fas fa-sign-out-alt"></i> Logout', Url::to(['site/logout']), [
