@@ -4,8 +4,7 @@ namespace frontend\controllers;
 
 use frontend\models\Task;
 use Yii;
-use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
+use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
 class TaskController extends \yii\web\Controller
@@ -24,11 +23,18 @@ class TaskController extends \yii\web\Controller
 
     public function actionIndex()
     {
-        $tasks = Task::getTasksByUser()->all();
-        return $this->render('index', [
-            'tasks' => $tasks,
+        // Use ActiveDataProvider instead of fetching all tasks into an array
+        $dataProvider = new ActiveDataProvider([
+            'query' => Task::getTasksByUser(), // Query to get tasks created by the logged-in user
+            'pagination' => [
+                'pageSize' => 10, // Adjust page size if needed
+            ],
         ]);
-    }    
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider, // Pass the data provider to the view
+        ]);
+    }
 
     public function actionCreate()
     {
