@@ -14,6 +14,10 @@ return [
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['guest', 'user'],
+        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
             'enableCsrfValidation' => true,
